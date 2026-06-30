@@ -1,10 +1,10 @@
 from ultralytics import YOLO
 import cv2
 
-MODEL_VERSION = 1
+MODEL_VERSION = 2
 
 # 1. Load your optimized ONNX model
-model = YOLO(f'best-V{MODEL_VERSION}.onnx', task='detect')
+model = YOLO(f'models/best-V{MODEL_VERSION}.onnx', task='detect')
 
 # 2. Initialize your camera (0 is usually the default system webcam)
 cap = cv2.VideoCapture(0)
@@ -19,7 +19,7 @@ while True:
     
     # 3. Run detection.
     # PRO-TIP: Lowering 'imgsz' to 320 makes it run significantly faster on a Pi 4!
-    results = model(frame, imgsz=640, conf=0.4)
+    results = model(frame, imgsz=320, conf=0.4)
     
     # 4. Draw bounding boxes on the live frame
     annotated_frame = results[0].plot()
