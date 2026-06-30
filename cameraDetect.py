@@ -1,8 +1,10 @@
 from ultralytics import YOLO
 import cv2
 
+MODEL_VERSION = 1
+
 # 1. Load your optimized ONNX model
-model = YOLO('best.onnx', task='detect')
+model = YOLO(f'best-V{MODEL_VERSION}.onnx', task='detect')
 
 # 2. Initialize your camera (0 is usually the default system webcam)
 cap = cv2.VideoCapture(0)
@@ -23,7 +25,7 @@ while True:
     annotated_frame = results[0].plot()
     
     # Display the live window
-    cv2.imshow('Orange Ball Tracker', annotated_frame)
+    cv2.imshow('Tracker', annotated_frame)
     
     # Break the loop if the 'q' key is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
